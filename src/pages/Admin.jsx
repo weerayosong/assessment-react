@@ -105,11 +105,11 @@ export default function Admin() {
                                             {member.position}
                                         </td>
                                         <td className="p-4 text-center text-xs">
-                                            <button className="mx-2 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer">
+                                            <button className="mx-1 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer">
                                                 Edit
                                             </button>{' '}
                                             /
-                                            <button className="mx-2 font-bold text-red-500 hover:text-red-300 transition-colors cursor-pointer">
+                                            <button className="mx-1 font-bold text-red-500 hover:text-red-300 transition-colors cursor-pointer">
                                                 Delete
                                             </button>
                                         </td>
