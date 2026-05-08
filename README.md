@@ -17,3 +17,10 @@ I'll make the `MainLayout` (Outlet of Header+SectionContent)
 ### this project i don't wanna use Context then simple state with react-router-dom're good enough
 
 last but not least `App` to manage all route, and then It's time to start my first phase!
+
+---
+
+- setup route in `App`
+- make `MainLayout` component to setup all layout Header + Outlet.
+- make 2 pages Home and Owner, with their paths, cool.
+- prepare `title` for Home, User and Admin Pages.
