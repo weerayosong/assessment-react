@@ -11,13 +11,13 @@ export default function SectionContent({ title }) {
 
             <div className="flex gap-12 md:gap-24">
                 <button
-                    className="bg-white px-6 py-3 rounded shadow-sm font-bold hover:bg-slate-50 transition-colors"
+                    className="bg-white px-6 py-3 rounded shadow-sm font-bold hover:bg-slate-50 transition-colors cursor-pointer"
                     onClick={() => navigate('/user')}
                 >
                     User Section
                 </button>
                 <button
-                    className="bg-white px-6 py-3 rounded shadow-sm font-bold hover:bg-slate-50 transition-colors"
+                    className="bg-white px-6 py-3 rounded shadow-sm font-bold hover:bg-slate-50 transition-colors cursor-pointer"
                     onClick={() => navigate('/admin')}
                 >
                     Admin Section

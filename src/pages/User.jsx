@@ -49,7 +49,7 @@ export default function User() {
                                         Name
                                     </th>
                                     <th className="p-4 font-bold text-slate-700">
-                                        LastName
+                                        Last Name
                                     </th>
                                     <th className="p-4 font-bold text-slate-700">
                                         Position
@@ -60,7 +60,7 @@ export default function User() {
                                 {members.map((member) => (
                                     <tr
                                         key={member.id}
-                                        className="border-b border-slate-200"
+                                        className="border-b border-slate-200 text-sm"
                                     >
                                         <td className="p-4 text-slate-600">
                                             {member.name}

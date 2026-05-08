@@ -50,3 +50,11 @@ last but not least `App` to manage all route, and then It's time to start my fir
 - if state change? yup, re-render!
 
 ---
+
+## then, Admin.jsx (only UI)
+
+- Ctrl+C and Ctrl+V from User.jsx
+- Add Create member form.
+- Add Admin CRUD field in display table.
+
+---
