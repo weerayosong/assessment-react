@@ -24,3 +24,7 @@ last but not least `App` to manage all route, and then It's time to start my fir
 - make `MainLayout` component to setup all layout Header + Outlet.
 - make 2 pages Home and Owner, with their paths, cool.
 - prepare `title` for Home, User and Admin Pages.
+
+---
+
+- add btn, onClick, useNavigate >> 2 new page-level components (That's just contain different title only).
