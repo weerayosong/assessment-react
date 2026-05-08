@@ -48,6 +48,39 @@ export default function Admin() {
         }
     }
 
+    // post
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (!name || !lastName || !position) return alert('fill empty field')
+
+        setIsLoading(true)
+
+        const memberData = { name, lastName, position }
+
+        try {
+            // post
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(memberData),
+            })
+            if (response.ok) alert('post,done!')
+
+            clearForm()
+            setRefreshTrigger((prev) => prev + 1)
+        } catch (err) {
+            alert('Error: ' + err.message)
+        }
+    }
+
+    // util functions
+
+    const clearForm = () => {
+        setName('')
+        setLastName('')
+        setPosition('')
+    }
+
     return (
         <div className="w-full flex flex-col items-center pb-16">
             <SectionContent title="🍑 Admin Section 🍑" />
@@ -55,7 +88,10 @@ export default function Admin() {
             <div className="w-full max-w-4xl px-6 mt-10">
                 <div className="mb-10">
                     <h2 className="text-xl font-bold mb-4">Create Member</h2>
-                    <form className="flex flex-col md:flex-row gap-4 items-center">
+                    <form
+                        className="flex flex-col md:flex-row gap-4 items-center"
+                        onSubmit={handleSubmit}
+                    >
                         <input
                             type="text"
                             placeholder="Name"

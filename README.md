@@ -65,16 +65,26 @@ last but not least `App` to manage all route, and then It's time to start my fir
 
 - delete someone's data (Sorry, it's for education attempt, lol)
 
-- add new useState to help manage first page load and after delete fetch (refetch )
+- add new useState to help manage first page load and after delete fetch (refetch ) `refreshTrigger`
 
 - prepare 3 useState for next phase, create and update
 
 ```
 const [name, setName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [position, setPosition] = useState('')
+const [lastName, setLastName] = useState('')
+const [position, setPosition] = useState('')
 ```
 
 Okay, need to commit first, before my app crash
+
+---
+
+## then, Create
+
+- set value and onClick for change the "creating new member" states
+- handleSubmit
+- clearForm after handleSubmit too (then refetch)
+- need setInterval to prevent multiple post (if i have time to to implement it in the last, just test it with the `Enter` spam)
+- commit
 
 ---
