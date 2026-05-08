@@ -6,13 +6,19 @@ export default function Admin() {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [position, setPosition] = useState('')
+
+    const [refreshTrigger, setRefreshTrigger] = useState(0) // add another useState to clear cascadeing render
+
+    const API_URL = 'https://67eca027aa794fb3222e43e2.mockapi.io/members'
+    // get
     useEffect(() => {
         const fetchMembers = async () => {
             try {
-                const response = await fetch(
-                    'https://67eca027aa794fb3222e43e2.mockapi.io/members',
-                )
-                if (!response.ok) throw new Error('ไม่สามารถดึงข้อมูลได้')
+                const response = await fetch(API_URL)
+                if (!response.ok) throw new Error(`Crap! I'can't fetch`)
                 const data = await response.json()
                 setMembers(data)
             } catch (err) {
@@ -23,7 +29,24 @@ export default function Admin() {
         }
 
         fetchMembers()
-    }, [])
+    }, [refreshTrigger])
+
+    // delete
+    const handleDelete = async (id) => {
+        if (!window.confirm('del, are you sure?')) return
+
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'DELETE',
+            })
+            if (response.ok) {
+                alert('del, done!')
+                setRefreshTrigger((prev) => prev + 1)
+            }
+        } catch (err) {
+            alert('Error: ' + err.message)
+        }
+    }
 
     return (
         <div className="w-full flex flex-col items-center pb-16">
@@ -36,25 +59,27 @@ export default function Admin() {
                         <input
                             type="text"
                             placeholder="Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full px-4 py-2 bg-white border border-slate-300 rounded focus:outline-none focus:border-slate-500"
-                            disabled
                         />
                         <input
                             type="text"
                             placeholder="Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                             className="w-full px-4 py-2 bg-white border border-slate-300 rounded focus:outline-none focus:border-slate-500"
-                            disabled
                         />
                         <input
                             type="text"
                             placeholder="Position"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
                             className="w-full px-4 py-2 bg-white border border-slate-300 rounded focus:outline-none focus:border-slate-500"
-                            disabled
                         />
                         <button
-                            type="button"
+                            type="submit"
                             className="w-full md:w-auto px-8 py-2 bg-slate-400 text-white font-bold rounded hover:bg-slate-500 transition-colors  cursor-pointer"
-                            disabled
                         >
                             Save
                         </button>
@@ -105,11 +130,16 @@ export default function Admin() {
                                             {member.position}
                                         </td>
                                         <td className="p-4 text-center text-xs">
-                                            <button className="mx-1 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer">
+                                            <button assName="mx-1 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer">
                                                 Edit
                                             </button>{' '}
                                             /
-                                            <button className="mx-1 font-bold text-red-500 hover:text-red-300 transition-colors cursor-pointer">
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(member.id)
+                                                }
+                                                className="mx-1 font-bold text-red-500 hover:text-red-300 transition-colors cursor-pointer"
+                                            >
                                                 Delete
                                             </button>
                                         </td>

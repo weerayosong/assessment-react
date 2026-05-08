@@ -58,3 +58,23 @@ last but not least `App` to manage all route, and then It's time to start my fir
 - Add Admin CRUD field in display table.
 
 ---
+
+## Add my first CRUD function
+
+**Delete 😈**
+
+- delete someone's data (Sorry, it's for education attempt, lol)
+
+- add new useState to help manage first page load and after delete fetch (refetch )
+
+- prepare 3 useState for next phase, create and update
+
+```
+const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [position, setPosition] = useState('')
+```
+
+Okay, need to commit first, before my app crash
+
+---
