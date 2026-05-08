@@ -28,3 +28,25 @@ last but not least `App` to manage all route, and then It's time to start my fir
 ---
 
 - add btn, onClick, useNavigate >> 2 new page-level components (That's just contain different title only).
+
+---
+
+## next, User.jsx (fetch, store, and display)
+
+**I use 4 Hooks (3 useState, 1 useEffect)**
+
+- useEffect: fetch always use useEffect, except that you have all data prepared in your store(global), [] dependency for only first-time on page load.
+- 3 useState:
+
+1. `members`: my data storage(array[]), use first at the `Try` block `setMembers(data)`
+   for store data then use to display them all with `members.map()`.
+
+2. `isLoading`: is it loading?(bool), use for check is it loading >> then re-render, another role is for close the status isLoading even done or error.
+
+3. `error`: just use as an error bin(null or error.message)
+
+**That's right >> Fetch >> !isLoading !error then.. return UI!**
+
+- if state change? yup, re-render!
+
+---
