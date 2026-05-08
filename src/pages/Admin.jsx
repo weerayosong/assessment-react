@@ -9,6 +9,7 @@ export default function Admin() {
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
     const [position, setPosition] = useState('')
+    const [editingId, setEditingId] = useState(null)
 
     const [refreshTrigger, setRefreshTrigger] = useState(0) // add another useState to clear cascadeing render
 
@@ -48,7 +49,7 @@ export default function Admin() {
         }
     }
 
-    // post
+    // post and put
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!name || !lastName || !position) return alert('fill empty field')
@@ -58,14 +59,25 @@ export default function Admin() {
         const memberData = { name, lastName, position }
 
         try {
-            // post
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(memberData),
-            })
-            if (response.ok) alert('post,done!')
+            if (editingId) {
+                // put
+                const response = await fetch(`${API_URL}/${editingId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(memberData),
+                })
+                if (response.ok) alert('update,done!')
+            } else {
+                // post
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(memberData),
+                })
+                if (response.ok) alert('post,done!')
+            }
 
+            // clear form & refetch
             clearForm()
             setRefreshTrigger((prev) => prev + 1)
         } catch (err) {
@@ -76,9 +88,17 @@ export default function Admin() {
     // util functions
 
     const clearForm = () => {
+        setEditingId(null)
         setName('')
         setLastName('')
         setPosition('')
+    }
+
+    const handleEditClick = (member) => {
+        setEditingId(member.id)
+        setName(member.name)
+        setLastName(member.lastName)
+        setPosition(member.position)
     }
 
     return (
@@ -87,7 +107,11 @@ export default function Admin() {
 
             <div className="w-full max-w-4xl px-6 mt-10">
                 <div className="mb-10">
-                    <h2 className="text-xl font-bold mb-4">Create Member</h2>
+                    <h2 className="text-xl font-bold mb-4">
+                        {editingId
+                            ? `Edit User (ID: ${editingId})`
+                            : 'Create Member'}
+                    </h2>
                     <form
                         className="flex flex-col md:flex-row gap-4 items-center"
                         onSubmit={handleSubmit}
@@ -117,8 +141,17 @@ export default function Admin() {
                             type="submit"
                             className="w-full md:w-auto px-8 py-2 bg-slate-400 text-white font-bold rounded hover:bg-slate-500 transition-colors  cursor-pointer"
                         >
-                            Save
+                            {editingId ? 'Update' : 'Save'}
                         </button>
+                        {editingId && (
+                            <button
+                                type="button"
+                                onClick={clearForm}
+                                className="bg-slate-200 px-4 py-2 rounded font-bold"
+                            >
+                                Cancel
+                            </button>
+                        )}
                     </form>
                 </div>
 
@@ -166,7 +199,12 @@ export default function Admin() {
                                             {member.position}
                                         </td>
                                         <td className="p-4 text-center text-xs">
-                                            <button assName="mx-1 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer">
+                                            <button
+                                                onClick={() =>
+                                                    handleEditClick(member)
+                                                }
+                                                className="mx-1 font-bold text-slate-500 hover:text-slate-300 transition-colors cursor-pointer"
+                                            >
                                                 Edit
                                             </button>{' '}
                                             /

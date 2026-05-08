@@ -88,3 +88,25 @@ Okay, need to commit first, before my app crash
 - commit
 
 ---
+
+## last CRUD, Update(Edit member info)
+
+- add new useState `editingId`(null) for..
+
+### (Single Form for Create and Update)
+
+- ใช้ระบุเป้าหมายให้(Targeting): ชื่ออาจมีซ้ำกัน เราจึงต้องส่ง id (เพราะไม่ซ้ำกัน) ไปบอก API ให้ชัดเจนว่าต้องการแก้ไขข้อมูลของแถวไหน
+
+- ใช้เป็นสวิตช์สลับโหมด (Mode Switcher): editingId เริ่ม null(ค่าว่าง) ถ้าไม่nullแล้วแปลว่าจะะแก้ >> ตอนนี้ฟอร์มกำลังอยู่ในโหมด "สร้างคนใหม่" หรือ "แก้ไขคนเดิม"
+
+**how?**
+
+1. Triggering Update Mode
+   editingId ไม่ใช่ null ปุ๊บ >> UI จะเปลี่ยนข้อความปุ่มจาก "Save" เป็น "Update" && "Cancel" too
+
+2. พิมพ์แก้ไขข้อมูล
+   เมื่อแก้ข้อมูลในช่อง Input ค่าใน State name, lastName, และ position ก็จะถูกอัปเดตไปตามตัวอักษรที่พิมพ์
+
+3. เมื่อกดปุ่ม Submit (Update) ฟังก์ชัน handleSubmit จะทำงาน และจะมาเจอเงื่อนไข if >> editingId มีค่า true >> ทำ Update ไม่ใช่ Create, then put, and then set editingId state back to null.
+
+Okay, nearly timeup, commit push and done.
